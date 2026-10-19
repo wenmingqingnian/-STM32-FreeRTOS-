@@ -1,0 +1,45 @@
+# ===== Keil 编译产物 =====
+OBJ/
+OBJ_BOOT_AUDIT/
+OBJ_APP_AUDIT/
+OBJ_BOOT_PROV/
+OBJ_APP_PROV/
+*.o
+*.d
+*.crf
+*.lnp
+*.axf
+*.hex
+*.htm
+*.lst
+*.dep
+*.iex
+*.sct
+*.scvd
+*.map
+*.bin
+
+# ===== Keil 用户界面状态（每次打开都会变）=====
+*.uvguix.*
+*.bak
+*.bak-*
+
+# ===== 构建日志 =====
+USER/build_log*.txt
+
+# ===== 工具缓存与临时文件 =====
+__pycache__/
+*.pyc
+tmp/
+*.exe
+
+# ===== 本地开发目录 =====
+.workbuddy/
+.codex_tmp/
+.preview/
+
+# ===== 本地未接线的第三方修复包 =====
+range_hood_fix_v2/
+
+# ===== 本地学习副本（与正式源码重复）=====
+BSP/LOWPOWER_LEARN/

@@ -1,0 +1,1236 @@
+﻿# Task 16 pipeline 2026-09-27 00:34:24
+
+==== Stage 0: python tool unit tests ====
+.............................................................................
+----------------------------------------------------------------------
+Ran 77 tests in 0.294s
+System.Management.Automation.RemoteException
+OK
+..........................
+----------------------------------------------------------------------
+Ran 26 tests in 0.042s
+System.Management.Automation.RemoteException
+OK
+Stage 0: PASS (77 + 26 unit tests)
+
+==== Stage 1: host mock full regression (13 suites) ====
+==> suite crc32 (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-crc32-mock.log)
+suite check-value
+  ok one-shot "123456789"
+  ok stream whole
+  ok chunked 1 B
+  ok chunked 7 B
+  ok chunked 512 B
+  ok chunked irregular
+suite chunk-equivalence
+ size 0
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 1
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 2
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 3
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 7
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 511
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 512
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 513
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 1024
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 65535
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 65536
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 65537
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 65549
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+ size 70001
+  ok stream == one-shot
+  ok chunked 1 B == one-shot
+  ok chunked 7 B == one-shot
+  ok chunked 512 B == one-shot
+  ok chunked irregular == one-shot
+suite boundaries
+  ok one-shot empty == 0
+  ok stream empty == 0
+  ok one-shot NULL+0 == 0
+  ok update NULL+0 == 0
+  ok final idempotent
+  ok final == one-shot
+  ok zero-len update no-op
+suite compat
+  ok verify ok via wrapper
+  ok verify corrupted data fails
+crc32-stream: 85 checks, 0 failed
+crc32-stream: all cases passed
+==> suite meta (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-meta-mock.log)
+suite meta-encode-layout
+  ok magic[0] == 'I' (0x49)
+  ok magic[1] == 'P' (0x50)
+  ok magic[2] == 'A' (0x41)
+  ok magic[3] == '1' (0x31)
+  ok format_version lo == 0x01
+  ok format_version hi == 0x00
+  ok header_size lo == 36
+  ok header_size hi == 0
+  ok generation b0 == 0xEF
+  ok generation b1 == 0xCD
+  ok generation b2 == 0xAB
+  ok generation b3 == 0x89
+  ok state lo
+  ok state hi
+  ok app_base b0
+  ok app_base b1
+  ok app_base b2
+  ok app_base b3
+  ok image_size b0 == 0x00
+  ok image_size b1 == 0x10
+  ok image_size b2 == 0x00
+  ok image_size b3 == 0x00
+  ok image_crc b0 == 0xBE
+  ok image_crc b3 == 0xCA
+  ok image_version LE == 0x01020304
+  ok commit LE lo == 0xCC
+  ok commit LE hi == 0x33
+  ok record_crc field == CRC32(buf[0..30))
+  ok decode valid
+  ok generation round-trip
+  ok stateWord round-trip
+  ok appBase round-trip
+  ok imageSize round-trip
+  ok imageCrc round-trip
+  ok imageVersion round-trip
+  ok recordCrc round-trip
+  ok commitMarker round-trip
+  ok generation 0xFFFFFFFF round-trip
+  ok still valid with all-ones generation
+  ok erased page decodes invalid
+  ok Encode(NULL fields) tolerated
+  ok Encode(NULL buf) tolerated
+  ok Decode(NULL out) tolerated
+  ok Decode(NULL buf) -> invalid
+suite meta-field-corruption
+  ok reference record valid
+  ok corrupted magic -> invalid
+  ok corrupted format_version -> invalid
+  ok corrupted header_size -> invalid
+  ok corrupted record_crc -> invalid
+  ok commit marker erased (uncommitted) -> invalid
+  ok commit marker bit-off -> invalid
+  ok corrupted generation (CRC catch) -> invalid
+  ok corrupted image_size (CRC catch) -> invalid
+suite meta-generation-wrap
+  ok 0xFFFFFFFE older than 0xFFFFFFFF
+  ok 0xFFFFFFFF newer than 0xFFFFFFFE
+  ok 0 newer than 0xFFFFFFFF (wrap)
+  ok 0xFFFFFFFF older than 0 (wrap reverse)
+  ok 1 newer than 0
+  ok 0 older than 1
+  ok equal not newer
+  ok wrap sequence strictly increasing
+  ok wrap sequence reverse all older
+  ok diff 0x80000000 ambiguous
+  ok diff 0x80000000 ambiguous (reverse)
+  ok normal diff not ambiguous
+  ok equal not ambiguous by diff
+  ok neither newer when ambiguous (a->b)
+  ok neither newer when ambiguous (b->a)
+suite meta-select-latest
+  ok A=VALID5,B=RECEIVING6 -> select B
+  ok selected generation == 6
+  ok A=VALID7,B=RECEIVING6 -> select A
+  ok selected generation == 7
+  ok A=VALID5,B=VALID6 -> select B
+  ok A=VALID6,B=VALID5 -> select A
+  ok B corrupted -> select A
+  ok both corrupted -> NONE
+  ok selected == NULL on NONE
+  ok recB NULL -> select A
+  ok both NULL -> NONE
+  ok wrap: gen0 newer than max -> select B
+  ok diff 0x80000000 -> AMBIGUOUS
+  ok ambiguous -> selected NULL
+  ok equal generation -> AMBIGUOUS (conservative)
+suite meta-boot-decision
+  ok latest VALID -> CONTINUE
+  ok latest RECEIVING -> REJECT (stay in boot)
+  ok no valid record -> REJECT
+  ok both NULL -> REJECT
+  ok appBase mismatch -> REJECT
+  ok imageSize 7 (<8) -> REJECT
+  ok imageSize 8 (boundary) -> CONTINUE
+  ok imageSize == APP_CAPACITY -> CONTINUE
+  ok imageSize capacity+1 -> REJECT
+  ok ambiguous generations -> REJECT
+  ok unknown state word -> REJECT
+suite fake-flash-physics
+  ok program 0x1234 into erased page ok
+  ok 0->1 program (bit0 set) rejected
+  ok same-value reprogram allowed (no 0->1 bits)
+  ok 1->0 bit clear allowed
+  ok program 0xFFFF over programmed value rejected
+  ok odd address program rejected
+  ok unaligned page erase rejected
+  ok program beyond flash end rejected
+  ok erase beyond flash end rejected
+  ok page erase ok
+  ok erased halfword reads 0xFFFF
+  ok reprogram after erase ok
+  ok readback matches
+  ok erase after cut rejected
+  ok content unchanged after cut
+suite meta-write-record
+  ok WriteRecord(NULL io) -> -1
+  ok WriteRecord(NULL fields) -> -1
+  ok ReadRecord(NULL io) -> -1
+  ok ReadRecord(NULL buf) -> -1
+  ok WriteRecord ok
+  ok exactly one page erase
+  ok exactly 18 halfword programs
+  ok readback record valid
+  ok readback generation
+  ok readback stateWord
+  ok readback appBase
+  ok readback imageSize
+  ok readback imageCrc
+  ok readback imageVersion
+  ok readback commitMarker
+suite meta-write-power-cut
+  ok cut at erase -> -2
+  ok untouched page -> record invalid
+  ok cut at field halfword -> -3
+  ok partial record without commit -> invalid
+  ok commit halfword still erased (0xFFFF)
+  ok cut at commit program -> -4
+  ok all fields written but no commit -> invalid
+suite meta-power-cut-injection
+  ok session = 2 erases + 36 programs (38 ops)
+  ok no cut: boot new VALID (gen7)
+  injection points=39, continue-old=19, reject=19, continue-new=1
+  ok injection point count non-zero
+  ok no partial-write record ever booted
+  ok cut before START commit: old VALID(gen5) still boots (k=0..18)
+  ok cut after RECEIVING committed: stay in boot (k=19..37)
+  ok cut after final commit: new VALID(gen7) boots (k=38)
+  ok continue-old occurred
+  ok reject occurred
+  ok continue-new occurred
+suite meta-double-update
+  ok after update 1: CONTINUE gen7
+  ok mid update 2 (RECEIVING8 latest): REJECT
+  ok after update 2: select page A
+  ok after update 2: CONTINUE gen9
+meta: 145 checks, 0 failed (dual-page power-fail-safe metadata)
+meta: all cases passed
+==> suite boot-protocol (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-protocol-mock.log)
+== 1. normal START -> DATA xN -> END ==
+  ok s1 start accepted
+  ok s1 start base
+  ok s1 start size
+  ok s1 start crc
+  ok s1 start version
+  ok s1 data1 accepted
+  ok s1 data1 offset
+  ok s1 data1 len
+  ok s1 data1 payload
+  ok s1 data2 accepted
+  ok s1 data2 offset
+  ok s1 end accepted
+  ok s1 frame count
+  ok s1 error count
+  ok s1 512B accepted
+  ok s1 512B len
+  ok s1 second 512B accepted
+  ok s1 final odd accepted
+  ok s1 final odd offset
+  ok s1 final odd len
+  ok s1 end after odd final
+  ok s1 big session frames
+  ok s1 big session errors
+== 2. fragmentation / ring-tail / noise / back-to-back ==
+  ok s2 byte-by-byte frames
+  ok s2 byte-by-byte errors
+  ok s2 byte-by-byte event
+  ok s2 split at every position decodes identically
+  ok s2 noise frames
+  ok s2 noise errors
+  ok s2 noise event
+  ok s2 back-to-back frames
+  ok s2 back-to-back errors
+  ok s2 back-to-back kind[0]
+  ok s2 back-to-back kind[1]
+  ok s2 back-to-back payload
+== 3. header/payload_len/CRC frame rejection ==
+  ok s3 version=0 [err]
+  ok s3 version=0 [frames=0]
+  ok s3 version=0 [errors=1]
+  ok s3 version=2 [err]
+  ok s3 version=2 [frames=0]
+  ok s3 version=2 [errors=1]
+  ok s3 type=0x00 [err]
+  ok s3 type=0x00 [frames=0]
+  ok s3 type=0x00 [errors=1]
+  ok s3 type=0x06 [err]
+  ok s3 type=0x06 [frames=0]
+  ok s3 type=0x06 [errors=1]
+  ok s3 host sends ACK [err]
+  ok s3 host sends ACK [frames=0]
+  ok s3 host sends ACK [errors=1]
+  ok s3 host sends NACK [err]
+  ok s3 host sends NACK [frames=0]
+  ok s3 host sends NACK [errors=1]
+  ok s3 header_len=23 [err]
+  ok s3 header_len=23 [frames=0]
+  ok s3 header_len=23 [errors=1]
+  ok s3 header_len=25 [err]
+  ok s3 header_len=25 [frames=0]
+  ok s3 header_len=25 [errors=1]
+  ok s3 reserved=1 [err]
+  ok s3 reserved=1 [frames=0]
+  ok s3 reserved=1 [errors=1]
+  ok s3 DATA payload_len=0 [err]
+  ok s3 DATA payload_len=0 [frames=0]
+  ok s3 DATA payload_len=0 [errors=1]
+  ok s3 DATA payload_len=513 [err]
+  ok s3 DATA payload_len=513 [frames=0]
+  ok s3 DATA payload_len=513 [errors=1]
+  ok s3 START payload_len=15 [err]
+  ok s3 START payload_len=15 [frames=0]
+  ok s3 START payload_len=15 [errors=1]
+  ok s3 START payload_len=17 [err]
+  ok s3 START payload_len=17 [frames=0]
+  ok s3 START payload_len=17 [errors=1]
+  ok s3 END payload_len=1 [err]
+  ok s3 END payload_len=1 [frames=0]
+  ok s3 END payload_len=1 [errors=1]
+  ok s3 frame CRC corrupt [err]
+  ok s3 frame CRC corrupt [frames=0]
+  ok s3 frame CRC corrupt [errors=1]
+  ok s3 payload corrupt [err]
+  ok s3 payload corrupt [frames=0]
+  ok s3 payload corrupt [errors=1]
+  ok s3 DATA 512 boundary frames
+  ok s3 DATA 512 boundary errors
+== 4. overflow / bounds / seq jump / reorder / duplicate ==
+  ok s4 seq jump kind
+  ok s4 seq jump reason
+  ok s4 seq jump expected seq
+  ok s4 seq jump expected offset
+  ok s4 recovery after jump
+  ok s4 reorder kind
+  ok s4 reorder reason
+  ok s4 reorder expected seq
+  ok s4 dup dataAcc before
+  ok s4 dup kind
+  ok s4 dup no second program
+  ok s4 dup then next accepted
+  ok s4 dup next offset
+  ok s4 dup start first
+  ok s4 dup start kind
+  ok s4 dup start then data
+  ok s4 dup start data offset
+  ok s4 complete end
+  ok s4 dup end kind
+  ok s4 start after done kind
+  ok s4 start after done reason
+  ok s4 nack repeatable 1st
+  ok s4 nack repeatable 2nd
+  ok s4 nack no program
+== 5. bounds (subtract-first) / alignment / parity ==
+  ok s5 overflow wrap kind
+  ok s5 overflow wrap reason
+  ok s5 overflow no program
+  ok s5 overflow wrap2 reason
+  ok s5 near-full accepted
+  ok s5 in-range overflow reason
+  ok s5 misaligned reason
+  ok s5 wrong offset reason
+  ok s5 odd non-final reason
+  ok s5 5.6 full even accepted
+  ok s5 final odd accepted
+  ok s5 end after final odd
+  ok s5 512 first accepted
+  ok s5 512 second accepted
+  ok s5 512 end accepted
+  ok s5 512 errors
+== 6. START manifest validation (end-to-end) ==
+  ok s6 bad base kind
+  ok s6 bad base reason
+  ok s6 size=7 reason
+  ok s6 size=0 reason
+  ok s6 size=cap+1 reason
+  ok s6 size=cap accepted
+  ok s6 size=cap value
+  ok s6 size=8 accepted
+  ok s6 size=8 final data
+  ok s6 size=8 end
+  ok s6 start seq=5 reason
+  ok s6 start seq=5 expected
+  ok s6 data before start reason
+  ok s6 end before start reason
+  ok s6 conflicting start reason
+  ok s6 direct start kind
+  ok s6 direct start crc
+  ok s6 direct start version
+  ok s6 direct data kind
+  ok s6 direct data len
+== 7. timeout reset & resync (no Flash access) ==
+  ok s7 partial header no frame
+  ok s7 resync after mid-header reset
+  ok s7 resync errors
+  ok s7 resync event
+  ok s7 partial payload no frame
+  ok s7 resync after mid-payload reset frames
+  ok s7 resync errors 2
+  ok s7 session survives reset
+  ok s7 session offset kept
+  ok s7 session len kept
+  ok s7 noise then frame frames
+  ok s7 noise then frame errors
+  ok s7 noise then frame event
+  ok s7 flash independence (suite links no flash backend)
+boot-protocol: 159 checks, 0 failed
+boot-protocol: all cases passed
+==> suite boot-flash (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-flash-mock.log)
+== 1. region bounds: boot/meta/end all rejected ==
+  ok s1 erase boot page rejected
+  ok s1 erase below app rejected
+  ok s1 erase metaA rejected
+  ok s1 erase failAddr kept
+  ok s1 erase metaB rejected
+  ok s1 erase at app limit rejected
+  ok s1 erase status retained
+  ok s1 erase app first page ok
+  ok s1 erase app last page ok
+  ok s1 erase zero pages rejected
+  ok s1 erase huge page count rejected
+  ok s1 program boot rejected
+  ok s1 program below app rejected
+  ok s1 program metaA rejected
+  ok s1 program metaB rejected
+  ok s1 program failAddr kept
+  ok s1 program at app limit rejected
+  ok s1 program last halfword ok
+  ok s1 program one past limit rejected
+  ok s1 program len wrap rejected
+  ok s1 program wrap no flash op
+  ok s1 readback meta rejected
+  ok s1 readback at limit rejected
+  ok s1 crc meta rejected
+  ok s1 crc zero size rejected
+== 2. alignment & odd-length 0xFF padding ==
+  ok s2 erase +2 misaligned rejected
+  ok s2 erase failAddr kept
+  ok s2 erase +0x401 misaligned rejected
+  ok s2 erase failAddr updated
+  ok s2 program odd addr rejected
+  ok s2 program failAddr kept
+  ok s2 odd len program ok
+  ok s2 hw0 value
+  ok s2 hw1 value
+  ok s2 hw2 padded 0xFF high byte
+  ok s2 odd readback ok
+  ok s2 odd readback misaligned rejected
+  ok s2 even program ok
+  ok s2 even readback ok
+  ok s2 even next halfword untouched
+== 3. backend error stops immediately, code retained ==
+  ok s3 erase fail code
+  ok s3 erase failAddr is 3rd page
+  ok s3 erase status retained
+  ok s3 page0 erased
+  ok s3 page1 erased
+  ok s3 page2 keeps old data
+  ok s3 page3 keeps old data
+  ok s3 erase fail locked once
+  ok s3 erase fail unlocked once
+  ok s3 program fail code
+  ok s3 program failAddr is 4th halfword
+  ok s3 program status retained
+  ok s3 first 3 halfwords written
+  ok s3 halfword 3 written
+  ok s3 halfword 4 untouched
+  ok s3 tail untouched
+  ok s3 program fail locked once
+  ok s3 first erase fails
+  ok s3 first program fails
+  ok s3 failAddr is start
+  ok s3 rb setup program ok
+  ok s3 readback mismatch code
+  ok s3 readback failAddr is hw2
+  ok s3 readback status retained
+  ok s3 readback corrected ok
+== 4. whole-image CRC (VALID gate in Task 8) ==
+  ok s4 pad setup ok
+  ok s4 crc5 != crc6 (pad matters)
+  ok s4 crc over real size ok
+  ok s4 crc excluding pad only
+  ok s4 crc explicit size semantics
+  ok s4 erase 2 pages ok
+  ok s4 chunk1 ok
+  ok s4 chunk2 ok
+  ok s4 final odd chunk ok
+  ok s4 chunk1 readback ok
+  ok s4 chunk2 readback ok
+  ok s4 final chunk readback ok
+  ok s4 odd image crc ok
+  ok s4 wrong crc rejected
+  ok s4 crc status retained
+  ok s4 chunked crc equal
+  ok s4 corrupt caught by chunk readback
+  ok s4 corrupt failAddr
+  ok s4 corrupt caught by image crc
+== 5. image_size == APP_CAPACITY boundary ==
+  ok s5 APP_CAPACITY page aligned
+  ok s5 pages count is 112 (CB frozen)
+  ok s5 erase full capacity ok
+  ok s5 erase capacity+1 page rejected
+  ok s5 erase failAddr kept
+  ok s5 program capacity chunks of 512 B
+  ok s5 full-capacity crc ok
+  ok s5 crc capacity+1 rejected
+  ok s5 crc capacity+2 rejected
+  ok s5 last halfword reprogram ok
+  ok s5 one past limit rejected
+== 6. metadata erase API restricted to A/B pages ==
+  ok s6 erase metaA ok
+  ok s6 metaA erased
+  ok s6 metaB keeps junk
+  ok s6 erase metaB ok
+  ok s6 metaB erased
+  ok s6 meta selector 2 rejected
+  ok s6 meta selector 0xFF rejected
+  ok s6 meta erase fail code
+  ok s6 meta erase failAddr
+  ok s6 meta erase locked on error
+  ok s6 metaA keeps junk on fail
+== 7. unlock-once discipline & NULL safety ==
+  ok s7 erase for program ok
+  ok s7 unlock once for erase
+  ok s7 512B program ok
+  ok s7 unlock once for 256 halfwords
+  ok s7 lock paired
+  ok s7 ops are halfword-wise
+  ok s7 full-capacity page erase ok
+  ok s7 unlock once for all pages
+  ok s7 lock once for all pages
+  ok s7 read setup ok
+  ok s7 readback ok
+  ok s7 crc ok
+  ok s7 read ops never unlock
+  ok s7 read ops never lock
+  ok s7 NULL data rejected
+  ok s7 zero len rejected
+  ok s7 NULL data readback rejected
+  ok s7 param errors never unlock
+  ok s7 NULL ctx erase safe
+  ok s7 NULL ctx program safe
+  ok s7 NULL ctx readback safe
+  ok s7 NULL ctx crc safe
+  ok s7 NULL ctx meta safe
+  ok s7 NULL io erase safe
+  ok s7 NULL io program safe
+  ok s7 NULL io crc safe
+  ok s7 NULL io meta safe
+  ok s7 NULL cfg erase safe
+boot-flash: 134 checks, 0 failed
+boot-flash: all cases passed
+==> suite boot-image (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-image-mock.log)
+s1: full-chain baseline (VALID + vectors + CRC)
+  ok s1 valid image passes
+s2: initial MSP boundaries and alignment
+  ok s2 MSP=0x20000000 (SRAM bottom) accepted
+  ok s2 MSP=0x20005000 (SRAM top, inclusive) accepted
+  ok s2 MSP=0x20004FF8 (top-8, aligned) accepted
+  ok s2 MSP=0x20000004 (not 8 B aligned) rejected
+  ok s2 MSP=0x1FFFFFFF (1 B below SRAM) rejected
+  ok s2 MSP=0x20005001 (1 B above SRAM top) rejected
+s3: reset handler Thumb bit and cleared-PC range
+  ok s3 PC bit0=0 rejected
+  ok s3 cleared PC=APP_BASE (first address) accepted
+  ok s3 cleared PC=APP_BASE+size-2 (last valid) accepted
+  ok s3 cleared PC=APP_BASE+size (first outside) rejected
+  ok s3 cleared PC=APP_BASE-2 rejected
+s4: image_size and app_base checks
+  ok s4 image_size=7 rejected
+  ok s4 image_size=0 rejected
+  ok s4 image_size=APP_CAPACITY+1 rejected
+  ok s4 app_base mismatch rejected
+  ok s4 image_size=8 (vectors only) accepted
+s5: record state, params and chain order
+  ok s5 RECEIVING rejected despite perfect image
+  ok s5 undecodable record (valid=0) rejected
+  ok s5 NULL record rejected
+  ok s5 NULL io rejected
+  ok s5 NULL cfg rejected
+  ok s5 state checked before size
+  ok s5 size checked before base
+  ok s5 base checked before MSP
+  ok s5 MSP checked before PC
+  ok s5 PC checked before CRC
+s6: whole-image CRC (incl. vectors; odd size excludes 0xFF pad)
+  ok s6 CRC mismatch rejected
+  ok s6 corrupted vector word rejected by CRC
+  ok s6 odd size (0x101 B) with real-byte CRC accepted
+  ok s6 odd size wrong CRC rejected
+boot-image mock: 31 checks, 0 failed
+==> suite lowpower-policy (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-lowpower-policy-mock.log)
+s0: pure function (same snapshot -> same decision, no state)
+  ok same snapshot twice -> identical decision
+  ok interleaved snapshot does not interfere
+  ok NULL snapshot -> LP_SHALLOW_TICKLESS
+s1: three distinct decisions reachable
+  ok enum has exactly 3 members (0/1/2)
+  ok LSE+ready+idle>guard -> LP_STOP_RTC
+  ok no-timeout+no-iwdg+key-exti -> LP_STOP_EXTI_ONLY
+  ok gate violation -> LP_SHALLOW_TICKLESS
+s2: common STOP gate (all paths share it)
+  ok baseline is LP_STOP_RTC
+  ok not MODE_STANDBY -> shallow
+  ok motor not physically off -> shallow
+  ok buzzer busy -> shallow
+  ok IAP busy -> shallow
+  ok UART/DMA busy -> shallow
+  ok clock degraded -> shallow
+  ok gate violation also blocks EXTI-only path
+s3: LP_STOP_RTC preconditions (board / rtc_ready / idle>guard)
+  ok baseline -> LP_STOP_RTC
+  ok RTC not ready -> not LP_STOP_RTC
+  ok idle == wake_guard -> not LP_STOP_RTC
+  ok idle == guard+1 -> LP_STOP_RTC
+  ok idle == portMAX_DELAY -> LP_STOP_RTC
+s4: LP_STOP_EXTI_ONLY preconditions (no-timeout/iwdg/key-exti)
+  ok baseline -> LP_STOP_EXTI_ONLY
+  ok tasks waiting timeout -> shallow
+  ok IWDG needs service -> shallow
+  ok no key EXTI wake source -> shallow
+  ok RTC path takes precedence over EXTI-only
+s5: board gate (NO_LSE / PENDING never take RTC path)
+  ok NO_LSE board + injected rtc_ready -> not LP_STOP_RTC
+  ok PENDING board + injected rtc_ready -> not LP_STOP_RTC
+  ok PENDING board may still take EXTI-only path
+s6: Watchdog_RequiresPeriodicService
+  ok sw IWDG started + OBR.WDG_SW set -> service
+  ok sw IWDG started + OBR=0 -> service
+  ok sw stopped + OBR=0 (hw IWDG) -> service
+  ok sw stopped + OBR=0x1FF (WDG_SW clear) -> service
+  ok sw stopped + OBR.WDG_SW set -> no service
+  ok sw stopped + OBR=0x10000 + other bits -> no service
+  ok OBR bit16 is the only discriminator
+s7: LpPolicy_RefuseReason classification
+  ok refuse: LSE RTC baseline -> NONE
+  ok refuse: EXTI baseline -> NONE
+  ok refuse: not standby -> NOT_STANDBY
+  ok refuse: motor on -> MOTOR_ON
+  ok refuse: buzzer busy -> BUZZER_BUSY
+  ok refuse: iap busy -> IAP_BUSY
+  ok refuse: uart busy -> UART_BUSY
+  ok refuse: clock unhealthy -> CLOCK_UNHEALTHY
+  ok refuse: common gate takes precedence over EXTI preconds
+  ok refuse: tasks waiting timeout -> TASKS_WAITING
+  ok refuse: iwdg needs service -> IWDG_SERVICE
+  ok refuse: no key exti -> NO_EXTI
+  ok refuse: EXTI precondition order: tasks first
+  ok refuse: RTC degraded but EXTI eligible -> NONE
+  ok refuse: RTC down + tasks waiting -> TASKS_WAITING
+  ok refuse: short idle + EXTI eligible -> NONE
+  ok refuse: NULL snapshot -> NOT_STANDBY (conservative)
+  ok refuse: LP_REFUSE_COUNT covers all reasons
+  ok refuse: LP_REFUSE_NONE == 0 (index 0 for no refusal)
+  ok refuse: NONE <=> deep sleep decision (LSE RTC)
+  ok refuse: refused <=> shallow decision (IWDG)
+  ok refuse: refused <=> shallow decision (buzzer)
+lowpower-policy mock: 57 checks, 0 failed
+==> suite lowpower-math (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-lowpower-math-mock.log)
+s1: policy constants (strategy values, not measured)
+  ok LP_RTC_HZ == 1024 (LSE 32768 / (31+1))
+  ok LP_RTOS_HZ == 1000 (configTICK_RATE_HZ)
+  ok LP_MAX_STOP_MS == 1000 (safe cap, not optimal)
+  ok LP_WAKE_GUARD_TICKS == 2 (conservative guard)
+s2: forward conversion ceil(fticks*1024/1000)
+  ok fticks=0 -> 0
+  ok fticks=1 -> 2 (ceil 1.024)
+  ok fticks=2 -> 3 (ceil 2.048)
+  ok fticks=3 -> 4 (ceil 3.072)
+  ok fticks=500 -> 512 (exact)
+  ok fticks=977 -> 1001 (ceil 1000.448)
+  ok fticks=1000 -> 1024 (exact 1 s)
+  ok fticks=portMAX_DELAY -> saturated 0xFFFFFFFF
+  ok fticks=4194303999 -> 0xFFFFFFFF (in-domain max)
+  ok fticks=4194304000 -> saturated 0xFFFFFFFF
+s3: reverse conversion with remainder carry
+  ok delta=1024 r=0 -> 1000 ticks r=0
+  ok   remainder == 0
+  ok delta=512 -> 500 ticks
+  ok delta=1 r=0 -> 0 ticks
+  ok   remainder == 1000
+  ok delta=1 r=1000 -> 1 tick
+  ok   remainder == 976
+  ok delta=3 r=1000 -> 3 ticks
+  ok   remainder == 928
+  ok delta=0 r=500 -> 0 ticks
+  ok   remainder == 500 (unchanged)
+  ok delta=0xFFFFFFFF -> 4194303999 (64-bit proof)
+  ok   remainder == 24
+  ok remainder_out=NULL tolerated
+s4: long-sequence drift < 1 tick (remainder carry)
+  ok 1024 sleeps of 1 rtick -> exactly 1000 fticks
+  ok   final remainder == 0 (no drift)
+  ok 1000 sleeps of 3 rticks -> 2929 fticks (err 0.6875 < 1)
+  ok mixed 1/1024 rtick x500 -> 500488 fticks (exact)
+s5: RTC delta unsigned subtraction (wrap safe)
+  ok delta(1024, 0) == 1024
+  ok 32-bit wrap: delta(0x10, 0xFFFFFFF0) == 0x20
+  ok low-16-bit wrap: delta(0x10010, 0xFFF0) == 0x20
+  ok half-period boundary: delta(0x80001000, 0x7FFFF000) == 0x2000
+  ok delta(x, x) == 0
+  ok reversed input: delta(0x10, 0x20) == 0xFFFFFFF0
+s6: elapsed clamp to next unblock point
+  ok elapsed==expected -> unchanged
+  ok   not clamped
+  ok elapsed=expected+1 -> clamped to expected
+  ok   clamped flag set
+  ok elapsed=0xFFFFFFFF vs expected=100 -> 100
+  ok   clamped flag set
+  ok expected=portMAX_DELAY -> elapsed unchanged
+  ok   not clamped
+  ok elapsed=0 -> 0
+  ok   not clamped
+  ok clamped=NULL tolerated
+s7: alarm budget min(idle - guard, MAX_STOP) ceiling to rticks
+  ok idle=0 -> budget 0
+  ok idle=1 -> budget 0
+  ok idle=2 (== guard) -> budget 0
+  ok idle=3 (guard+1) -> 2 rticks
+  ok idle=502 -> 512 rticks
+  ok idle=1002 (guard+MAX_STOP) -> 1024 rticks (cap edge)
+  ok idle=1003 -> 1024 rticks (capped)
+  ok idle=100000 -> 1024 rticks (capped)
+  ok idle=portMAX_DELAY -> 1024 rticks (64-bit safe)
+lowpower-math mock: 58 checks, 0 failed
+==> suite rtc-lse (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-rtc-lse-mock.log)
+rtc-timebase mock (BOARD_C8_LSE full path)
+s0: NULL parameter defense
+  ok Init(NULL tb) -> ERR_PARAM
+  ok Init(NULL io) -> ERR_PARAM
+  ok IsReady(NULL) -> 0
+  ok ReadCounterStable(NULL) -> ERR_PARAM
+  ok SetAlarm(NULL) -> ERR_PARAM
+  ok CancelAlarm(NULL) -> ERR_PARAM
+s1: first init full sequence (signature mismatch)
+  ok Init fresh board -> OK
+  ok IsReady -> 1
+  ok pwr_bkp_enable runs first
+  ok backup_domain_reset before lse_on
+  ok lse_on before rtc_select_lse
+  ok rtc_select_lse before set_prescaler
+  ok set_prescaler before wait_rtc_sync
+  ok wait_rtc_sync before alarm_exti_nvic_init
+  ok signature write is the last init op
+  ok prescaler value is 31 (1024 Hz)
+  ok RTC_TB_PRL is 31
+  ok signature written to BKP_DR10
+  ok signature DR index is 10
+  ok backup domain reset happened once
+  ok no wait_poll consumed (LSE ready at 1st poll)
+s2: fast path (signature match + LSE running)
+  ok Init warm board -> OK
+  ok IsReady -> 1
+  ok no backup domain reset on fast path
+  ok no LSE restart on fast path
+  ok no prescaler rewrite on fast path
+  ok no signature rewrite on fast path
+  ok fast path sequence is exactly 5 ops
+  ok fast path order: pwr->read_bkp->lse_ready->sync->alarm_init
+  ok backup domain reset flag stays clear
+s3: LSE timeout degradation signal
+  ok Init with dead LSE -> ERR_LSE_TIMEOUT
+  ok IsReady -> 0 (degradation input for policy)
+  ok no rtc_select_lse after timeout
+  ok no prescaler write after timeout
+  ok no signature write after timeout
+  ok no alarm EXTI init after timeout
+  ok wait_poll bounded to RTC_TB_LSE_TIMEOUT_MS
+  ok lse_ready polled exactly timeout times
+  ok ReadCounterStable after timeout -> ERR_NOT_READY
+  ok SetAlarm after timeout -> ERR_NOT_READY
+  ok CancelAlarm after timeout -> ERR_NOT_READY
+s3b: LSE timeout boundary (off-by-one)
+  ok ready at last poll -> OK
+  ok wait_poll == TIMEOUT-1 on last-poll success
+  ok ready one poll too late -> ERR_LSE_TIMEOUT
+  ok wait_poll == TIMEOUT on failure
+s3c: signature match but LSE dead -> full re-init
+  ok Init with stopped LSE -> OK
+  ok backup domain reset executed
+  ok full re-init rewrote signature
+  ok prescaler reprogrammed
+s4: high-low-high stable counter read
+  ok clean read -> OK
+  ok clean read value
+  ok clean read: exactly 2 high + 1 low reads
+  ok one torn round -> OK on retry
+  ok retried read value uses stable high word
+  ok torn round consumed 4 high reads (2 rounds)
+  ok permanently torn -> ERR_READ_UNSTABLE
+  ok bounded retries: 2*MAX_RETRY high reads
+  ok NULL out -> ERR_PARAM
+s5: SetAlarm / CancelAlarm ordering (design 6.6)
+  ok SetAlarm -> OK
+  ok SetAlarm clears old flags BEFORE setting alarm
+  ok alarm counter forwarded
+  ok CancelAlarm -> OK
+  ok CancelAlarm cancels source BEFORE clearing flags
+  ok cancel executed once
+rtc-timebase mock: 64 checks, 0 failed
+==> suite rtc-stub (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-rtc-stub-mock.log)
+rtc-timebase mock (NO_LSE/PENDING board: zero-hardware stub)
+  ok Init on NO_LSE/PENDING board -> NOT_SUPPORTED
+  ok IsReady -> 0
+  ok ReadCounterStable -> NOT_SUPPORTED
+  ok SetAlarm -> NOT_SUPPORTED
+  ok CancelAlarm -> NOT_SUPPORTED
+  ok out zeroed deterministically
+  ok zero IO callbacks fired (no PC14/PC15, no BDCR)
+  ok Init(NULL tb) -> ERR_PARAM
+rtc-timebase mock: 8 checks, 0 failed
+==> suite exti-stop (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-exti-stop-mock.log)
+exti-stop-backend + clock-resume mock
+s0: NULL parameter defense
+  ok Init(NULL bk) -> ERR_PARAM
+  ok Init(NULL io) -> ERR_PARAM
+  ok Init(NULL clk_io) -> ERR_PARAM
+  ok Enter(NULL bk) -> ERR_PARAM
+  ok Exit(NULL bk) -> ERR_PARAM
+  ok GetWakeSource(NULL) -> WAKE_NONE
+s1: backend re-checks decision preconditions
+  ok tasks waiting timeout -> ERR_PRECONDITION
+  ok IWDG requires service -> ERR_PRECONDITION
+  ok both violated -> ERR_PRECONDITION
+  ok precondition refusal has zero IO side effects
+  ok Exit after refused Enter -> ERR_STATE
+s2: enter sequence ordering (design 6.6)
+  ok Init -> OK
+  ok Enter with confirmed preconditions -> OK
+  ok enter order: systick_stop/periph_quiesce/key_exti/clear_pending/pwr/wfi
+  ok enter is exactly 6 ops
+  ok clear_key_pending happens before WFI
+  ok no exit-side ops right after Enter
+  ok vTaskStepTick never called on enter path
+  ok wake source default NONE before Exit
+  ok re-Enter without Exit -> ERR_STATE
+  ok re-Enter adds no IO ops
+  ok cleanup Exit -> OK
+s3: exit sequence ordering + frozen tick
+  ok Exit with key pending -> OK
+  ok wake source is KEY
+  ok exit: read_exti_pending runs first
+  ok exit: clock HSE on before flash latency
+  ok exit: flash latency before bus prescalers
+  ok exit: bus prescalers before PLL enable
+  ok exit: PLL enable before SYSCLK select
+  ok exit: SYSCLK select before core clock update
+  ok exit: clock chain before peripheral resume
+  ok exit: peripheral resume before SysTick resume
+  ok SystemCoreClockUpdate called once
+  ok vTaskStepTick never called (tick frozen)
+  ok second Exit -> ERR_STATE
+s4: wake source classification
+  ok Exit with other-line pending -> OK
+  ok wake source is OTHER
+  ok key + other pending -> classified as KEY
+  ok Exit with no pending -> OK
+  ok wake source is NONE
+s5: clock resume failure propagation
+  ok Exit with dead HSE -> ERR_CLOCK_RESUME
+  ok wake source still recorded (KEY)
+  ok peripherals NOT resumed under HSI
+  ok SysTick NOT resumed under HSI
+  ok Exit after failed Exit -> ERR_STATE
+s6: SystemClock_RestoreAfterStop success order
+  ok NULL io -> ERR_PARAM
+  ok restore -> OK
+  ok restore order: hse_on/flash/bus/pll/select/update
+  ok order includes 2 HSE wait_polls (8 ops total)
+  ok HSE polled 3 times
+  ok wait_poll count 2 (HSE settle)
+  ok PLL polled once
+  ok SWS polled once
+s7: clock resume timeout fail-safes
+  ok HSE never ready -> ERR_HSE_TIMEOUT
+  ok no flash/bus/pll/select/update after HSE timeout
+  ok HSE wait bounded to timeout loops
+  ok PLL never ready -> ERR_PLL_TIMEOUT
+  ok flash/bus/pll executed before PLL timeout
+  ok no select/update after PLL timeout
+  ok PLL wait bounded to timeout loops
+  ok SWS never PLL -> ERR_SWITCH_TIMEOUT
+  ok select executed but no update after switch timeout
+  ok SWS wait bounded to timeout loops
+s8: clock resume timeout boundary
+  ok HSE ready at last loop -> OK
+  ok HSE one loop too late -> ERR_HSE_TIMEOUT
+  ok PLL ready at last loop -> OK
+  ok vTaskStepTick never called across whole suite
+exti-stop-backend mock: 67 checks, 0 failed
+==> suite task-health (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-task-health-mock.log)
+suite task-health-decide
+  ok all required present -> FEED
+  ok   and missing == 0
+  ok empty beats -> HOLD
+  ok   and missing == required
+  ok sensor missing -> HOLD
+  ok   missing == SENSOR bit
+  ok motor missing -> HOLD
+  ok state_mgr+speed_calc missing -> HOLD
+  ok   missing == STATE_MGR|SPEED_CALC
+  ok extra non-required bits -> still FEED
+  ok required == 0 -> FEED
+  ok   missing == 0
+  ok NULL missing ptr tolerated
+suite task-health-swap
+  ok fresh window reads 0
+  ok two beats accumulate
+  ok swap cleared the window
+  ok beat after swap lands in next window
+  ok bit 0 rejected (no crash)
+  ok still empty after invalid beat
+suite reset-cause-decode
+  ok CSR == 0 -> UNKNOWN
+  ok PORRSTF only -> POWER_ON
+  ok PORRSTF|PINRSTF (real power-on) -> POWER_ON
+  ok PINRSTF only -> PIN_RESET
+  ok SFTRSTF|PINRSTF -> SOFTWARE_RESET
+  ok IWDGRSTF|PINRSTF -> IWDG_RESET
+  ok WWDGRSTF -> WWDG_RESET
+  ok LPWRRSTF -> LOW_POWER_RESET
+  ok IWDG|WWDG|SFT co-set -> IWDG wins
+  ok WWDG|SFT co-set -> WWDG wins
+  ok all flags set -> IWDG (highest priority)
+  ok GetName bounds-checked
+suite task-health-standby-mask
+  ok active mask == full REQUIRED_MASK
+  ok standby mask constant is 0
+  ok standby mask == 0 (no required beats)
+  ok standby: empty beats -> FEED (periodic feed keeps IWDG alive)
+  ok active: empty beats -> HOLD (stop feeding)
+  ok bound query forwards (returns 0)
+  ok unbound again -> conservative default 1
+  ok exit grace: active+grace -> standby mask (transition)
+  ok active without grace -> full mask
+  ok standby ignores grace flag
+  ok grace window: empty beats -> FEED (feed gap stays <=2s)
+mock result: 42/42 cases passed (Plan-A Step5 + Task14 masks)
+==> suite standby-blocking (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-standby-blocking-mock.log)
+suite standby-state-mgr
+  ok active->standby = EDGE_ENTER
+  ok standby->active = EDGE_EXIT
+  ok active->active = EDGE_NONE
+  ok standby->standby = EDGE_NONE
+  ok standby & !sent -> send STOP (first cycle)
+  ok standby & sent -> no STOP resend
+  ok active -> never send STOP via standby path
+  ok active & sent(stale) -> no STOP
+  ok standby & sent -> block on state event queue
+  ok standby & !sent -> keep 50ms cycle (STOP pending)
+  ok active -> keep 50ms decision cycle
+  ok active & !sent -> keep 50ms cycle
+suite standby-motor
+  ok stopped & queue empty -> block on command
+  ok stopped & queue non-empty -> drain queue first
+  ok running & queue empty -> keep 50ms PID
+  ok running & queue non-empty -> keep 50ms PID
+suite standby-periodic
+  ok standby -> block on event group
+  ok active -> keep periodic cycle
+  ok ACTIVE bit == 0x01
+  ok STANDBY bit == 0x02
+  ok ACTIVE/STANDBY bits disjoint
+  ok SENSOR wake bit == 0x04
+  ok WIND wake bit == 0x08
+  ok UI wake bit == 0x10
+  ok DIAG wake bit == 0x20
+  ok all six standby event bits pairwise disjoint (0x3F)
+suite standby-buzzer
+  ok queue empty & output off -> STOP permitted
+  ok queue non-empty -> STOP denied
+  ok output active (beeping) -> STOP denied
+  ok queue non-empty & output active -> STOP denied
+  ok permitted maps to buzzer_idle=1 for policy snapshot
+suite standby-health-wait
+  ok standby & no IWDG service -> portMAX_DELAY
+  ok standby & IWDG service -> 2s window
+  ok active & no IWDG service -> 2s window
+  ok active & IWDG service -> 2s window
+  ok IWDG query default (unbound) -> 1 (conservative)
+suite standby-iwdg-exti-only
+  ok sw off + hw IWDG (OBR WDG_SW=0) -> service required
+  ok sw off + sw watchdog (OBR WDG_SW=1) -> no service
+  ok sw on -> service required regardless of OBR
+  ok all EXTI-only gates ok but IWDG needs service -> shallow
+  ok same snapshot with no IWDG service -> EXTI-only STOP
+  ok buzzer busy -> shallow (STOP gate)
+suite standby-watchdog-budget
+  ok reload == 2500 (nominal 4s @40kHz)
+  ok min timeout (LSI 60kHz) == 2668ms bound check
+  ok max timeout (LSI 30kHz) == 5335ms
+  ok min timeout > supervision window (2000ms)
+  ok budget margin >= 600ms
+mock result: 47/47 cases passed (Task 14 standby blocking)
+==> suite key-wakeup (log: ..\..\docs\interview-evidence\range-hood-rtos\logs\iap-stop-key-wakeup-mock.log)
+s1: EXTI ISR produces only a notification
+  ok Init: line_config called exactly once
+  ok Init: entry counter zeroed
+  ok Init: key irq counter zeroed
+  ok s1 isr entry counted
+  ok s1 key irq counted
+  ok s1 notify given once
+  ok s1 PR1 cleared in fake
+  ok s1 order: read before clear
+  ok s1 order: clear before notify
+  ok s1 foreign pending: no notify
+  ok s1 foreign pending: not cleared
+  ok s1 foreign counted
+  ok s1 both pending: key processed
+  ok s1 both pending: foreign recorded
+  ok s1 both pending: only key bit cleared
+  ok s1 notify total
+s2: contact bounce coalesces to one press event
+  ok s2 five edges -> five notifies
+  ok s2 one take consumes all 5
+  ok s2 pressed confirmed once
+  ok s2 in-hold bounce coalesced
+  ok s2 no spurious event during hold
+  ok s2 exactly one SHORT_PRESS
+  ok s2 event consumed once
+s3: edges around sleep are not lost
+  ok s3 sleeping edge still notifies
+  ok s3 sleeping edge cleared by ISR
+  ok s3 wake take returns 1
+  ok s3 press captured after wake
+  ok s3 full short press survives sleep
+s4: press classification stays in the state machine
+  ok s4 no event before long threshold
+  ok s4 LONG_PRESS from state machine
+  ok s4 still pressed during long press
+  ok s4 LONG_PRESSING repeats
+  ok s4 RELEASE on release
+  ok s4 idle after release
+  ok s4 SHORT_PRESS still classified
+s5: PB1-only registration and NVIC priority contract
+  ok s5 wake line is EXTI1 (PR1 bit)
+  ok s5 KEY2 disabled (PB12 unconfirmed)
+  ok s5 line_config once per Init
+  ok s5 counters reset by re-Init
+  ok s5 key EXTI priority is 6
+  ok s5 syscall priority is 3
+  ok s5 priority numerically >= syscall floor (lower prio)
+s6: scan blocking policy
+  ok s6 standby + idle -> portMAX_DELAY
+  ok s6 standby + in-progress -> finite
+  ok s6 active + idle -> finite
+  ok s6 active + in-progress -> finite
+  ok s6 finite period is 10ms
+s7: Key1_InProgress gates the standby block
+  ok s7 idle at start
+  ok s7 debounce counts as in progress
+  ok s7 pressed counts as in progress
+  ok s7 idle again after release
+key-wakeup: 51 checks, 0 failed
+mock suites [all]: all passed
+mock merged log: docs\interview-evidence\range-hood-rtos\logs\iap-stop-mock.log
+mock: TOTAL 948 checks, 0 failed (13/13 suites PASS)
+
+==== Stage 2: FINAL_AUDIT rebuild (Boot_SizeAudit / App_SizeAudit) ====
+==> Rebuild 'Boot_SizeAudit' in USER\boot_audit.uvprojx (log: OBJ_BOOT_AUDIT\build.log)
+PASS: target 'Boot_SizeAudit' 0 Error(s), 0 Warning(s) (rc=0)
+==> Rebuild 'App_SizeAudit' in USER\app_audit.uvprojx (log: OBJ_APP_AUDIT\build.log)
+PASS: target 'App_SizeAudit' 0 Error(s), 0 Warning(s) (rc=0)
+PASS: layout_provisional == 0 (frozen)
+label: FINAL_AUDIT
+boot: bin_size=11468 lr_size=11468 total_rw=3456 lr_base=0x08000000
+app:  bin_size=55084 lr_size=55428 total_rw=13688 lr_base=0x08000000
+PASS: boot bin_size == Total ROM Size (11468)
+PASS: boot bin_size 11468 <= LR_IROM1 Size 11468
+PASS: app bin_size == Total ROM Size (55084)
+PASS: app bin_size 55084 <= LR_IROM1 Size 55428
+PASS: boot Total RW 3456 <= 4096
+PASS: app Total RW 13688 <= 18432
+PASS: boot bin halfword aligned (11468 B)
+PASS: app bin halfword aligned (55084 B)
+PASS: BOOT_PART_SIZE 0x3800 == align_up(11468 + 2048, 1024)
+PASS: APP_BASE 0x08003800 == FLASH_BASE + BOOT_PART_SIZE
+PASS: APP_CAPACITY 0x1C000 == APP_LIMIT_EXCL - APP_BASE
+PASS: app bin 55084 <= APP_CAPACITY - 2048 = 112640 (margin 57556 B)
+LAYOUT_COMPUTED boot_part=0x3800 app_base=0x08003800 app_capacity=0x1C000 boot_len=11468 app_len=55084
+audit-gates [FINAL_AUDIT]: PASS
+
+==== Stage 3: main project rebuild (project.uvprojx) ====
+==> Rebuild 'project' in USER\project.uvprojx (log: OBJ\build.log)
+PASS: target 'project' 0 Error(s), 0 Warning(s) (rc=0)
+
+==== Stage 4: provisional rebuild pass 1 (final layout) ====
+==> Rebuild 'Boot_CB_Provisional' in USER\boot_cb_provisional.uvprojx (log: OBJ_BOOT_PROV\build.log)
+PASS: target 'Boot_CB_Provisional' 0 Error(s), 0 Warning(s) (rc=0)
+==> Rebuild 'App_CB_Provisional' in USER\app_cb_provisional.uvprojx (log: OBJ_APP_PROV\build.log)
+PASS: target 'App_CB_Provisional' 0 Error(s), 0 Warning(s) (rc=0)
+PASS: layout_provisional == 0 (frozen)
+label: PROV_PASS1
+boot: bin_size=11468 lr_size=11468 total_rw=3456 lr_base=0x08000000
+app:  bin_size=55084 lr_size=55428 total_rw=13688 lr_base=0x08003800
+PASS: boot bin_size == Total ROM Size (11468)
+PASS: boot bin_size 11468 <= LR_IROM1 Size 11468
+PASS: app bin_size == Total ROM Size (55084)
+PASS: app bin_size 55084 <= LR_IROM1 Size 55428
+PASS: boot Total RW 3456 <= 4096
+PASS: app Total RW 13688 <= 18432
+PASS: boot bin halfword aligned (11468 B)
+PASS: app bin halfword aligned (55084 B)
+PASS: BOOT_PART_SIZE 0x3800 == align_up(11468 + 2048, 1024)
+PASS: APP_BASE 0x08003800 == FLASH_BASE + BOOT_PART_SIZE
+PASS: APP_CAPACITY 0x1C000 == APP_LIMIT_EXCL - APP_BASE
+PASS: app bin 55084 <= APP_CAPACITY - 2048 = 112640 (margin 57556 B)
+LAYOUT_COMPUTED boot_part=0x3800 app_base=0x08003800 app_capacity=0x1C000 boot_len=11468 app_len=55084
+audit-gates [PROV_PASS1]: PASS
+convergence pass1: LAYOUT_COMPUTED boot_part=0x3800 app_base=0x08003800 app_capacity=0x1C000 boot_len=11468 app_len=55084
+
+==== Stage 5: provisional rebuild pass 2 (convergence) ====
+==> Rebuild 'Boot_CB_Provisional' in USER\boot_cb_provisional.uvprojx (log: OBJ_BOOT_PROV\build.log)
+PASS: target 'Boot_CB_Provisional' 0 Error(s), 0 Warning(s) (rc=0)
+==> Rebuild 'App_CB_Provisional' in USER\app_cb_provisional.uvprojx (log: OBJ_APP_PROV\build.log)
+PASS: target 'App_CB_Provisional' 0 Error(s), 0 Warning(s) (rc=0)
+PASS: layout_provisional == 0 (frozen)
+label: PROV_PASS2
+boot: bin_size=11468 lr_size=11468 total_rw=3456 lr_base=0x08000000
+app:  bin_size=55084 lr_size=55428 total_rw=13688 lr_base=0x08003800
+PASS: boot bin_size == Total ROM Size (11468)
+PASS: boot bin_size 11468 <= LR_IROM1 Size 11468
+PASS: app bin_size == Total ROM Size (55084)
+PASS: app bin_size 55084 <= LR_IROM1 Size 55428
+PASS: boot Total RW 3456 <= 4096
+PASS: app Total RW 13688 <= 18432
+PASS: boot bin halfword aligned (11468 B)
+PASS: app bin halfword aligned (55084 B)
+PASS: BOOT_PART_SIZE 0x3800 == align_up(11468 + 2048, 1024)
+PASS: APP_BASE 0x08003800 == FLASH_BASE + BOOT_PART_SIZE
+PASS: APP_CAPACITY 0x1C000 == APP_LIMIT_EXCL - APP_BASE
+PASS: app bin 55084 <= APP_CAPACITY - 2048 = 112640 (margin 57556 B)
+LAYOUT_COMPUTED boot_part=0x3800 app_base=0x08003800 app_capacity=0x1C000 boot_len=11468 app_len=55084
+audit-gates [PROV_PASS2]: PASS
+convergence pass2: LAYOUT_COMPUTED boot_part=0x3800 app_base=0x08003800 app_capacity=0x1C000 boot_len=11468 app_len=55084
+layout_converged: PASS (two consecutive builds identical)
+
+==== Stage 6: check_memory_layout --final ====
+layout: FINAL
+flash_end_exclusive: 0x08020000
+layout_provisional: 0
+final gate: LAYOUT_PROVISIONAL == 0 -> PASS
+meta_a/meta_b: page aligned, non-overlapping
+current capacity warning: PASS (app audit bin 55084 B <= APP_CAPACITY 114688 B)
+boot target 'Boot_CB_Provisional': IROM 0x08000000/0x3800, IRAM 0x20000000/0x5000, VECT_TAB_OFFSET=none -> PASS
+app target 'App_CB_Provisional': IROM 0x08003800/0x1C000, IRAM 0x20000000/0x5000, VECT_TAB_OFFSET=0x3800 -> PASS
+boot map: LR_IROM1 base 0x08000000 size 11468 B, Total RW 3456 B <= 4096 B -> PASS
+app map: LR_IROM1 base 0x08003800 size 55428 B, Total RW 13688 B <= 18432 B -> PASS
+boot bin 11468 B <= boot capacity 14336 B -> PASS
+app bin 55084 B <= app capacity 114688 B -> PASS
+boot vector: MSP 0x20000D80 in SRAM, PC 0x08000189 thumb in [0x08000000,0x08003800) -> PASS
+app vector: MSP 0x20003578 in SRAM, PC 0x08003A91 thumb in [0x08003800,0x0801F800) -> PASS
+flash intervals: boot [0x08000000,0x08002CCC), app [0x08003800,0x08010F2C), meta [0x0801F800,0x08020000) disjoint -> PASS
+boot bin halfword aligned (11468 B) -> PASS
+app bin halfword aligned (55084 B) -> PASS
+tight window (hard margin 2048 B): boot 12 KiB -> APP_CAPACITY 116736 B, A_max 114688 B; boot 16 KiB -> APP_CAPACITY 112640 B, A_max 110592 B
+overall: PASS
+layout log: docs\interview-evidence\range-hood-rtos\logs\iap-stop-layout.log
+
+==== Stage 7: stale address scan ====
+scanned 98 source files under: BSP, APP_TASK, SYSTEM, USER, CONFIG, BOOT
+stale-scan: PASS (no stale addresses/symbols outside allowlist)
+
+==== Stage 8: .iap pack + round-trip ====
+APP_BASE      = 0x08003800
+APP_CAPACITY  = 114688 B
+image_size    = 55084 B
+image_crc32   = 0x6256F71A
+image_version = 0x00000100
+frames        = 110 (START 1 + DATA 108 + END 1)
+output        = OBJ_APP_PROV\range_hood_app.iap (57740 B)
+next          = python tools/iap_uart_sender.py --input OBJ_APP_PROV\range_hood_app.iap
+iap: OBJ_APP_PROV\range_hood_app.iap (57740 B)
+bin: OBJ_APP_PROV\range_hood_app.bin (55084 B)
+frames: START 1 + DATA 108 + END 1
+manifest: target_base=0x08003800 image_size=55084 image_crc32=0x6256F71A image_version=0x00000100
+reassembled bytes == original bin (55084 B) -> identical
+round-trip: PASS
+
+==== Task 16 pipeline summary ====
+tool unit tests: PASS
+mock: PASS
+Boot_SizeAudit: 0 Error(s), 0 Warning(s)
+App_SizeAudit: 0 Error(s), 0 Warning(s)
+FINAL_AUDIT gates: PASS
+project (main): 0 Error(s), 0 Warning(s)
+Boot_CB_Provisional: 0 Error(s), 0 Warning(s)
+App_CB_Provisional: 0 Error(s), 0 Warning(s)
+layout_converged: PASS
+layout --final: PASS
+layout_provisional: 0
+stale-scan: PASS
+package round-trip: PASS
+overall: PASS

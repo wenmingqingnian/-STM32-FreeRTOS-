@@ -1,0 +1,19 @@
+layout: FINAL
+flash_end_exclusive: 0x08020000
+layout_provisional: 0
+final gate: LAYOUT_PROVISIONAL == 0 -> PASS
+meta_a/meta_b: page aligned, non-overlapping
+current capacity warning: PASS (app audit bin 55084 B <= APP_CAPACITY 114688 B)
+boot target 'Boot_CB_Provisional': IROM 0x08000000/0x3800, IRAM 0x20000000/0x5000, VECT_TAB_OFFSET=none -> PASS
+app target 'App_CB_Provisional': IROM 0x08003800/0x1C000, IRAM 0x20000000/0x5000, VECT_TAB_OFFSET=0x3800 -> PASS
+boot map: LR_IROM1 base 0x08000000 size 11468 B, Total RW 3456 B <= 4096 B -> PASS
+app map: LR_IROM1 base 0x08003800 size 55428 B, Total RW 13688 B <= 18432 B -> PASS
+boot bin 11468 B <= boot capacity 14336 B -> PASS
+app bin 55084 B <= app capacity 114688 B -> PASS
+boot vector: MSP 0x20000D80 in SRAM, PC 0x08000189 thumb in [0x08000000,0x08003800) -> PASS
+app vector: MSP 0x20003578 in SRAM, PC 0x08003A91 thumb in [0x08003800,0x0801F800) -> PASS
+flash intervals: boot [0x08000000,0x08002CCC), app [0x08003800,0x08010F2C), meta [0x0801F800,0x08020000) disjoint -> PASS
+boot bin halfword aligned (11468 B) -> PASS
+app bin halfword aligned (55084 B) -> PASS
+tight window (hard margin 2048 B): boot 12 KiB -> APP_CAPACITY 116736 B, A_max 114688 B; boot 16 KiB -> APP_CAPACITY 112640 B, A_max 110592 B
+overall: PASS

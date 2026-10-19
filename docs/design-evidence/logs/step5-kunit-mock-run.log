@@ -1,0 +1,35 @@
+﻿suite task-health-decide
+  ok all required present -> FEED
+  ok   and missing == 0
+  ok empty beats -> HOLD
+  ok   and missing == required
+  ok sensor missing -> HOLD
+  ok   missing == SENSOR bit
+  ok motor missing -> HOLD
+  ok state_mgr+speed_calc missing -> HOLD
+  ok   missing == STATE_MGR|SPEED_CALC
+  ok extra non-required bits -> still FEED
+  ok required == 0 -> FEED
+  ok   missing == 0
+  ok NULL missing ptr tolerated
+suite task-health-swap
+  ok fresh window reads 0
+  ok two beats accumulate
+  ok swap cleared the window
+  ok beat after swap lands in next window
+  ok bit 0 rejected (no crash)
+  ok still empty after invalid beat
+suite reset-cause-decode
+  ok CSR == 0 -> UNKNOWN
+  ok PORRSTF only -> POWER_ON
+  ok PORRSTF|PINRSTF (real power-on) -> POWER_ON
+  ok PINRSTF only -> PIN_RESET
+  ok SFTRSTF|PINRSTF -> SOFTWARE_RESET
+  ok IWDGRSTF|PINRSTF -> IWDG_RESET
+  ok WWDGRSTF -> WWDG_RESET
+  ok LPWRRSTF -> LOW_POWER_RESET
+  ok IWDG|WWDG|SFT co-set -> IWDG wins
+  ok WWDG|SFT co-set -> WWDG wins
+  ok all flags set -> IWDG (highest priority)
+  ok GetName bounds-checked
+mock result: 31/31 cases passed (Plan-A Step5 pure logic)
